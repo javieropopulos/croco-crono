@@ -1,0 +1,7 @@
+<div class="container">
+  <%= simple_form_for [@task, @comment] do |f| %>
+    <%= f.input :content, required: true %>
+    <%= f.input :duration, required: true %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  <% end %>
+</div>

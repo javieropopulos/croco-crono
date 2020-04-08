@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Tes projets </h1>
+
+  <% if @projects.count.zero? %>
+    <p>Aucun projet</p>
+  <% else %>
+    <% @projects.each do |project| %>
+      <ul>
+        <li>
+          <%= link_to edit_user_project_path(current_user, project) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to user_project_path(current_user, project), method: :delete do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+          <%= link_to project.name.capitalize, user_project_path(current_user, project)  %>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <%= link_to 'Créer un nouveau projet', new_user_project_path(current_user), class: 'btn btn-primary'  %>
+  <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
+</div>
+

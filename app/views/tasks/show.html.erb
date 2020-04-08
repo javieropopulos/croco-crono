@@ -1,0 +1,17 @@
+<div class="container">
+  <h1><%= @task.name.capitalize %></h1>
+  <% @comments.each do |comment| %>
+    <ul>
+      <li>
+        <%= link_to task_comment_path(@task, comment), method: :delete do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+        <%= link_to edit_task_comment_path(@task, comment) do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+        <%= comment.content.capitalize %>
+      </li>
+    </ul>
+  <% end %>
+  <%= link_to 'Retour', user_project_path(current_user, @task.project), class: 'btn btn-primary' %>
+</div>

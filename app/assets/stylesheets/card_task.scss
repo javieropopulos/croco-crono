@@ -1,0 +1,102 @@
+.card-product {
+  overflow: hidden;
+  min-height: 80px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 24px;
+  overflow:auto;
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  position: absolute;
+  top: 10px;
+}
+
+.card-product p {
+  position:absolute;
+  bottom: -5px;
+  right: 15px;
+  font-size: 12px;
+}
+
+.card-product h5 {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  position: absolute;
+  top: 30px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+
+.card-product-infos {
+  margin-left: 50px;
+}
+
+#delete_task a {
+  position:absolute;
+  top: 30px;
+  right: 8px;
+  color: red;
+}
+
+#update_task a {
+  position:absolute;
+  top: 3px;
+  left: 15px;
+  color: blue;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.end_of_task p {
+  position:absolute;
+  bottom: -5px;
+  left: 20px;
+}
+
+#add-comment a {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+}
+
+#comments {
+  margin-top: 10px;
+}
+
+#up {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
+
+#down {
+  position: absolute;
+  top: 3px;
+  right: 25px;
+}
+
+.logo {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 500px;
+  height:150px;
+}

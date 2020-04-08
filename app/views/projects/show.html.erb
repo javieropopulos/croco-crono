@@ -1,0 +1,149 @@
+<div class="logo">
+  <%= image_tag("croco-logo.svg", :alt => "logo") %>
+</div>
+<div class="container">
+  <div class="my-5">
+    <h1><%= @project.name.capitalize %></h1>
+    <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
+  </div>
+  <div class="description">
+    <p>
+      <%= @project.description %>
+    </p>
+    <%= link_to 'nouvelle intro',  new_project_introduction_path(@project, @introduction), class: 'btn btn-primary' %>
+  </div>
+  <% if @tasks.count.zero? %>
+    <p>Aucune tâche pour le moment</p>
+  <% else %>
+    <% @tasks.each do |task| %>
+      <tbody id= "spans" data-url = "<%= sort_tasks_path %>">
+      <div class="card-product">
+        <div class="card-product-infos">
+          <h2> <%= task.name.capitalize %></h2>
+          <div id="up">
+            <%= link_to project_move_task_lower_path(@project, task), method: :patch do %>
+              <i class="fas fa-arrow-down"></i>
+            <% end %>
+          </div>
+          <div id="down">
+            <%= link_to project_move_task_higher_path(@project, task), method: :patch do %>
+              <i class="fas fa-arrow-up"></i>
+            <% end %>
+          </div>
+          <ul>
+            <div id="comments">
+              <% task.comments.each do |comment| %>
+                <li>
+                  <%= link_to task_move_comment_lower_path(task, comment), method: :patch do %>
+                    <i class="fas fa-arrow-down"></i>
+                  <% end %>
+                  <%= link_to task_move_comment_higher_path(task, comment), method: :patch do %>
+                    <i class="fas fa-arrow-up"></i>
+                  <% end %>
+                  <%= link_to task_comment_path(task, comment), method: :delete do %>
+                    <i class="fas fa-trash-alt"></i>
+                  <% end %>
+                  <%= link_to edit_task_comment_path(task, comment) do %>
+                    <i class="far fa-edit"></i>
+                  <% end %>
+                  <%= comment.content.capitalize %> --- <%= comment.duration %> minutes
+                </li>
+              <% end %>
+            </div>
+          </ul>
+          <div id="add-comment">
+            <%= link_to new_task_comment_path(task) do %>
+              <i class="fas fa-plus-circle"></i>
+            <% end %>
+          </div>
+          <p>
+            <% duration = 0 %>
+            <% task.comments.each { |comment| duration += comment.duration } if task.present? %>
+            <%= duration %>
+            minutes
+          </p>
+          <div class="end_of_task">
+            <p>
+              <% if @minutes > 59 %>
+                <% @minutes = (@minutes - 60) %>
+                <% @hours += 1 %>
+                <%= @hours %> :
+                <% if @minutes < 10 %>
+                  0<%= @minutes %>
+                <% else %>
+                  <%= @minutes %>
+                <% end %>
+                => <%= @hours %> :
+                <% if (@minutes + duration) < 10 %>
+                  0<%= @minutes += duration %>
+                <% else %>
+                  <%= @minutes += duration %>
+                <% end %>
+              <% else %>
+                <%= @hours %> :
+                <% if @minutes < 10 %>
+                  0<%= @minutes %>
+                <% else %>
+                  <%= @minutes %>
+                <% end %>
+                <% if (@minutes + duration) > 59 %>
+                  <% @hours += 1 %>
+                  <% @minutes = (@minutes - 60) %>
+                  => <%= @hours %> :
+                  <% if (@minutes + duration) < 10 %>
+                    0<%= @minutes += duration %>
+                  <% else %>
+                    <%= @minutes += duration %>
+                  <% end %>
+                <% else %>
+                  => <%= @hours %> :
+                  <% if (@minutes + duration) < 10 %>
+                    0<%= @minutes += duration %>
+                  <% else %>
+                    <%= @minutes += duration %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </p>
+          </div>
+          <div id="delete_task">
+            <%= link_to project_task_path(@project, task), method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
+          <div id="update_task">
+            <%= link_to edit_project_task_path(@project, task) do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if @counter.zero? %>
+  <% else %>
+    <div class="mb-5">
+      <h3>Fin : <%= @hours %> :
+        <% if (@minutes) < 10 %>
+          0<%= @minutes %>
+        <% else %>
+          <%= @minutes %></h3>
+        <% end %>
+      <% if @counter < 59 %>
+        <h3>Total: <%= @counter %> minutes</h3>
+      <% else %>
+        <% if (@counter / 60) == 1 %>
+          <h3>Total: <%= @counter / 60 %> heure et <%= @counter % 60 %> minutes</h3>
+        <% else %>
+          <h3>Total: <%= @counter / 60 %> heures et <%= @counter % 60 %> minutes</h3>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="mb-5">
+    <%= link_to 'Creer une nouvelle tâche', new_project_task_path(@project), class: 'btn btn-primary' %>
+    <%= link_to 'Retour', user_projects_path(current_user), class: 'btn btn-primary' %>
+  </div>
+</div>
+
