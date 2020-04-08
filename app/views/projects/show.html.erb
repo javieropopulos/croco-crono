@@ -6,10 +6,10 @@
     <h1><%= @project.name.capitalize %></h1>
     <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
   </div>
-  <div class="description">
+  <!-- <div class="description">
     <p>
-      <%= @project.description %>
-    </p>
+      <%#= @project.description %>
+    </p> -->
     <%= link_to 'nouvelle intro',  new_project_introduction_path(@project, @introduction), class: 'btn btn-primary' %>
   </div>
   <% if @tasks.count.zero? %>
