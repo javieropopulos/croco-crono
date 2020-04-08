@@ -14,6 +14,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'acts_as_list'
+gem 'bootstrap', '~> 4.4.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
