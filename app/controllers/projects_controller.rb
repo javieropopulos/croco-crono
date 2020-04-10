@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.all.select { |x| x.user == current_user }
   end
 
   def show
