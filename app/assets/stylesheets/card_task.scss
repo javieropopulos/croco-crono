@@ -79,7 +79,7 @@
 }
 
 #comments {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #up {
@@ -99,4 +99,27 @@
   margin-left: 20px;
   width: 500px;
   height:150px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.line {
+  display: flex;
+}
+
+.container {
+  position: relative;
+}
+
+.nouvelle-intro {
+  position: absolute;
+  top: 130px;
+  right: 30px;
+}
+
+.introductions {
+  display: flex;
+  margin-bottom: 5px;
 }

@@ -1,16 +1,39 @@
-<div class="logo">
-  <%= image_tag("croco-logo.svg", :alt => "logo") %>
-</div>
 <div class="container">
-  <div class="my-5">
-    <h1><%= @project.name.capitalize %></h1>
-    <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
+  <div class="my-3">
+    <div class="project-infos">
+      <h1><%= @project.name.capitalize %></h1>
+      <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
+    </div>
+    <div class="project-assets hidden">
+      <%= link_to edit_user_project_path(current_user, @project) do %>
+        <i class="far fa-edit"></i>
+      <% end %>
+      <%= link_to user_project_path(current_user, @project), method: :delete do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </div>
   </div>
-  <!-- <div class="description">
-    <p>
-      <%#= @project.description %>
-    </p> -->
-    <%= link_to 'nouvelle intro',  new_project_introduction_path(@project, @introduction), class: 'btn btn-primary' %>
+  <div class="description">
+    <% @introductions.each do |introduction| %>
+      <div class="introductions">
+        <div class="introduction">
+          <%= introduction.contenu %>
+        </div>
+        <div class="introduction-assets hidden">
+          <%= link_to edit_project_introduction_path(@project, introduction) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to project_introduction_path(@project, introduction), method: :delete do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="nouvelle-intro">
+    <%= link_to new_project_introduction_path(@project, @introduction) do %>
+      <i class="fas fa-plus-circle"></i>
+    <% end %>
   </div>
   <% if @tasks.count.zero? %>
     <p>Aucune tâche pour le moment</p>
@@ -34,19 +57,25 @@
             <div id="comments">
               <% task.comments.each do |comment| %>
                 <li>
-                  <%= link_to task_move_comment_lower_path(task, comment), method: :patch do %>
-                    <i class="fas fa-arrow-down"></i>
-                  <% end %>
-                  <%= link_to task_move_comment_higher_path(task, comment), method: :patch do %>
-                    <i class="fas fa-arrow-up"></i>
-                  <% end %>
-                  <%= link_to task_comment_path(task, comment), method: :delete do %>
-                    <i class="fas fa-trash-alt"></i>
-                  <% end %>
-                  <%= link_to edit_task_comment_path(task, comment) do %>
-                    <i class="far fa-edit"></i>
-                  <% end %>
-                  <%= comment.content.capitalize %> --- <%= comment.duration %> minutes
+                  <div class="line">
+                    <div class="comment">
+                      <%= comment.content.capitalize %> --- <%= comment.duration %> minutes
+                    </div>
+                    <div class="comment-assets hidden">
+                      <%= link_to task_move_comment_lower_path(task, comment), method: :patch do %>
+                        <i class="fas fa-arrow-down"></i>
+                      <% end %>
+                      <%= link_to task_move_comment_higher_path(task, comment), method: :patch do %>
+                        <i class="fas fa-arrow-up"></i>
+                      <% end %>
+                      <%= link_to task_comment_path(task, comment), method: :delete do %>
+                        <i class="fas fa-trash-alt"></i>
+                      <% end %>
+                      <%= link_to edit_task_comment_path(task, comment) do %>
+                        <i class="far fa-edit"></i>
+                      <% end %>
+                    </div>
+                  </div>
                 </li>
               <% end %>
             </div>
@@ -59,8 +88,10 @@
           <p>
             <% duration = 0 %>
             <% task.comments.each { |comment| duration += comment.duration } if task.present? %>
-            <%= duration %>
-            minutes
+            <% if duration.positive? %>
+              <%= duration %>
+              minutes
+            <% end %>
           </p>
           <div class="end_of_task">
             <p>
@@ -147,3 +178,33 @@
   </div>
 </div>
 
+<script>
+  const tasks = document.querySelectorAll('.comment')
+  const assets = document.querySelectorAll('.comment-assets')
+  for( var i = 0; i < tasks.length; i++ ){
+    function listener(index) {
+      assets[index].classList.toggle('hidden');
+    }
+    tasks[i].addEventListener('click', listener.bind(null, i))
+  }
+</script>
+
+<script>
+  const projectInfos = document.querySelector('.project-infos')
+  const projectAssets = document.querySelector('.project-assets')
+  projectInfos.addEventListener('click', function() {
+    projectAssets.classList.toggle('hidden')
+  })
+</script>
+
+<script>
+  const intros = document.querySelectorAll('.introduction')
+  const introAssets = document.querySelectorAll('.introduction-assets')
+  console.log(intros)
+  for( var i = 0; i < intros.length; i++ ){
+    function listener(index) {
+      introAssets[index].classList.toggle('hidden');
+    }
+    intros[i].addEventListener('click', listener.bind(null, i))
+  }
+</script>

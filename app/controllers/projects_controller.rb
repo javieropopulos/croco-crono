@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @tasks = @project.tasks
+    @introductions = @project.introductions
     @counter = 0
     @tasks.each { |task| task.comments.each { |comment| @counter += comment.duration } }
     @start_time = @project.start_time.to_s[10..-8]
@@ -39,7 +40,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     @project.update(project_params)
-    redirect_to user_projects_path(current_user)
+    redirect_to user_project_path(current_user, @project)
   end
 
   private
