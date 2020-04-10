@@ -14,20 +14,22 @@
     </div>
   </div>
   <div class="description">
-    <% @introductions.each do |introduction| %>
-      <div class="introductions">
-        <div class="introduction">
-          <%= introduction.contenu %>
+    <% if @introductions.present? %>
+      <% @introductions.each do |introduction| %>
+        <div class="introductions">
+          <div class="introduction">
+            <%= introduction.contenu %>
+          </div>
+          <div class="introduction-assets hidden">
+            <%= link_to edit_project_introduction_path(@project, introduction) do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+            <%= link_to project_introduction_path(@project, introduction), method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </div>
         </div>
-        <div class="introduction-assets hidden">
-          <%= link_to edit_project_introduction_path(@project, introduction) do %>
-            <i class="far fa-edit"></i>
-          <% end %>
-          <%= link_to project_introduction_path(@project, introduction), method: :delete do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <div class="nouvelle-intro">
