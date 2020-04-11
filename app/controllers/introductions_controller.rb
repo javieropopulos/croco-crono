@@ -32,9 +32,25 @@ class IntroductionsController < ApplicationController
     redirect_to user_project_path(current_user, @project)
   end
 
+  def move_introduction_lower
+    @project = Project.find(params[:project_id])
+    @introduction = Introduction.find(params[:id])
+    @introduction.move_lower
+    @introduction.save!
+    redirect_to user_project_path(current_user, @project)
+  end
+
+  def move_introduction_higher
+    @project = Project.find(params[:project_id])
+    @introduction = Introduction.find(params[:id])
+    @introduction.move_higher
+    @introduction.save!
+    redirect_to user_project_path(current_user, @project)
+  end
+
   private
 
   def intro_params
-    params.require(:introduction).permit(:project, :contenu)
+    params.require(:introduction).permit(:project, :contenu, :position)
   end
 end

@@ -55,15 +55,6 @@ class TasksController < ApplicationController
     redirect_to user_project_path(current_user, @project)
   end
 
-  def sort
-    params[:span].each_with_index do |id, index|
-      Span.where(id: id).update_all(position: index + 1)
-    end
-    respond_to do |format|
-      format.js
-    end
-  end
-
   private
 
   def task_params

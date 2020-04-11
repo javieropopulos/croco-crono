@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="my-3">
+  <div class="my-5">
     <div class="project-infos">
       <h1><%= @project.name.capitalize %></h1>
       <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
@@ -26,6 +26,12 @@
             <% end %>
             <%= link_to project_introduction_path(@project, introduction), method: :delete do %>
               <i class="fas fa-trash-alt"></i>
+            <% end %>
+            <%= link_to project_move_introduction_lower_path(@project, introduction), method: :patch do %>
+              <i class="fas fa-arrow-down"></i>
+            <% end %>
+            <%= link_to project_move_introduction_higher_path(@project, introduction), method: :patch do %>
+              <i class="fas fa-arrow-up"></i>
             <% end %>
           </div>
         </div>
@@ -154,6 +160,37 @@
     <% end %>
   <% end %>
 
+  <div class="description">
+    <% if @conclusions.present? %>
+      <% @conclusions.each do |conclusion| %>
+        <div class="conclusions">
+          <div class="conclusion">
+            <%= conclusion.contenu %>
+          </div>
+          <div class="conclusion-assets hidden">
+            <%= link_to edit_project_conclusion_path(@project, conclusion) do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+            <%= link_to project_conclusion_path(@project, conclusion), method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+            <%= link_to project_move_conclusion_lower_path(@project, conclusion), method: :patch do %>
+              <i class="fas fa-arrow-down"></i>
+            <% end %>
+            <%= link_to project_move_conclusion_higher_path(@project, conclusion), method: :patch do %>
+              <i class="fas fa-arrow-up"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="nouvelle-conclusion">
+    <%= link_to new_project_conclusion_path(@project, @conclusion) do %>
+      <i class="fas fa-plus-circle"></i>
+    <% end %>
+  </div>
+
   <% if @counter.zero? %>
   <% else %>
     <div class="mb-5">
@@ -202,11 +239,21 @@
 <script>
   const intros = document.querySelectorAll('.introduction')
   const introAssets = document.querySelectorAll('.introduction-assets')
-  console.log(intros)
   for( var i = 0; i < intros.length; i++ ){
     function listener(index) {
       introAssets[index].classList.toggle('hidden');
     }
     intros[i].addEventListener('click', listener.bind(null, i))
+  };
+</script>
+
+<script>
+  const conclusions = document.querySelectorAll('.conclusion')
+  const conclusionAssets = document.querySelectorAll('.conclusion-assets')
+  for( var i = 0; i < conclusions.length; i++ ){
+    function listener(index) {
+      conclusionAssets[index].classList.toggle('hidden');
+    }
+    conclusions[i].addEventListener('click', listener.bind(null, i))
   };
 </script>

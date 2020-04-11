@@ -115,11 +115,16 @@
 
 .nouvelle-intro {
   position: absolute;
-  top: 130px;
-  right: 30px;
+  top: 120px;
+  left: 30px;
 }
 
 .introductions {
   display: flex;
-  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.conclusions {
+  display: flex;
+  margin-top: 5px;
 }

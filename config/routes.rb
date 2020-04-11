@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     resources :conclusions
     patch '/tasks/:id/move_task_lower', to: 'tasks#move_task_lower', as: 'move_task_lower'
     patch '/tasks/:id/move_task_higher', to: 'tasks#move_task_higher', as: 'move_task_higher'
+    patch '/introductions/:id/move_introduction_lower', to: 'introductions#move_introduction_lower', as: 'move_introduction_lower'
+    patch '/introductions/:id/move_introduction_higher', to: 'introductions#move_introduction_higher', as: 'move_introduction_higher'
+    patch '/conclusions/:id/move_conclusion_lower', to: 'conclusions#move_conclusion_lower', as: 'move_conclusion_lower'
+    patch '/conclusions/:id/move_conclusion_higher', to: 'conclusions#move_conclusion_higher', as: 'move_conclusion_higher'
   end
 
   resources :tasks, only: %i[] do

@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @tasks = @project.tasks
     @introductions = @project.introductions
+    @conclusions = @project.conclusions
     @counter = 0
     @tasks.each { |task| task.comments.each { |comment| @counter += comment.duration } }
     @start_time = @project.start_time.to_s[10..-8]
