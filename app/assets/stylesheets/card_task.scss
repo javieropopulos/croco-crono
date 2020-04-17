@@ -27,7 +27,7 @@
 .card-product p {
   position:absolute;
   bottom: -5px;
-  right: 15px;
+  left: 15px;
   font-size: 12px;
 }
 
@@ -66,10 +66,12 @@
   visibility: hidden;
 }
 
-.end_of_task p {
+.end_of_task {
   position:absolute;
-  bottom: -5px;
-  left: 20px;
+  bottom: 5px;
+  right: 15px;
+  font-size: 20px;
+  padding: 2px;
 }
 
 #add-comment a {
@@ -127,4 +129,11 @@
 .conclusions {
   display: flex;
   margin-top: 5px;
+}
+
+.duration {
+  position:absolute;
+  bottom: 5px;
+  left: 15px;
+  font-size: 12px;
 }

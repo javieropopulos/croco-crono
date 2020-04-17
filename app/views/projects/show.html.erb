@@ -2,7 +2,7 @@
   <div class="my-5">
     <div class="project-infos">
       <h1><%= @project.name.capitalize %></h1>
-      <h5>Le <%= @project.start_time.strftime("%d-%m-%Y") %>, démarre à <%= @start_time %> heures.</h5>
+      <h5>Commencera à <%= @start_time %> heures, le <%= @project.start_time.strftime("%d-%m-%Y") %>.</h5>
     </div>
     <div class="project-assets hidden">
       <%= link_to edit_user_project_path(current_user, @project) do %>
@@ -93,58 +93,60 @@
               <i class="fas fa-plus-circle"></i>
             <% end %>
           </div>
-          <p>
+          <div class="duration">
             <% duration = 0 %>
             <% task.comments.each { |comment| duration += comment.duration } if task.present? %>
             <% if duration.positive? %>
               <%= duration %>
               minutes
             <% end %>
-          </p>
-          <div class="end_of_task">
-            <p>
-              <% if @minutes > 59 %>
-                <% @minutes = (@minutes - 60) %>
-                <% @hours += 1 %>
-                <%= @hours %> :
-                <% if @minutes < 10 %>
-                  0<%= @minutes %>
-                <% else %>
-                  <%= @minutes %>
-                <% end %>
-                => <%= @hours %> :
-                <% if (@minutes + duration) < 10 %>
-                  0<%= @minutes += duration %>
-                <% else %>
-                  <%= @minutes += duration %>
-                <% end %>
-              <% else %>
-                <%= @hours %> :
-                <% if @minutes < 10 %>
-                  0<%= @minutes %>
-                <% else %>
-                  <%= @minutes %>
-                <% end %>
-                <% if (@minutes + duration) > 59 %>
-                  <% @hours += 1 %>
-                  <% @minutes = (@minutes - 60) %>
-                  => <%= @hours %> :
-                  <% if (@minutes + duration) < 10 %>
-                    0<%= @minutes += duration %>
-                  <% else %>
-                    <%= @minutes += duration %>
-                  <% end %>
-                <% else %>
-                  => <%= @hours %> :
-                  <% if (@minutes + duration) < 10 %>
-                    0<%= @minutes += duration %>
-                  <% else %>
-                    <%= @minutes += duration %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </p>
           </div>
+          <% if duration.positive? %>
+            <div class="end_of_task">
+              <strong>
+                <% if @minutes > 59 %>
+                  <% @minutes = (@minutes - 60) %>
+                  <% @hours += 1 %>
+                  <%= @hours %> h
+                  <% if @minutes < 10 %>
+                    0<%= @minutes %>
+                  <% else %>
+                    <%= @minutes %>
+                  <% end %>
+                  -- <%= @hours %> h
+                  <% if (@minutes + duration) < 10 %>
+                    0<%= @minutes += duration %>
+                  <% else %>
+                    <%= @minutes += duration %>
+                  <% end %>
+                <% else %>
+                  <%= @hours %> h
+                  <% if @minutes < 10 %>
+                    0<%= @minutes %>
+                  <% else %>
+                    <%= @minutes %>
+                  <% end %>
+                  <% if (@minutes + duration) > 59 %>
+                    <% @hours += 1 %>
+                    <% @minutes = (@minutes - 60) %>
+                    -- <%= @hours %> h
+                    <% if (@minutes + duration) < 10 %>
+                      0<%= @minutes += duration %>
+                    <% else %>
+                      <%= @minutes += duration %>
+                    <% end %>
+                  <% else %>
+                    -- <%= @hours %> h
+                    <% if (@minutes + duration) < 10 %>
+                      0<%= @minutes += duration %>
+                    <% else %>
+                      <%= @minutes += duration %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </strong>
+            </div>
+          <% end %>
           <div id="delete_task">
             <%= link_to project_task_path(@project, task), method: :delete do %>
               <i class="fas fa-trash-alt"></i>
@@ -194,26 +196,26 @@
   <% if @counter.zero? %>
   <% else %>
     <div class="mb-5">
-      <h3>Fin : <%= @hours %> :
+      <h3>Heure de fin : <%= @hours %> :
         <% if (@minutes) < 10 %>
           0<%= @minutes %>
         <% else %>
           <%= @minutes %></h3>
         <% end %>
       <% if @counter < 59 %>
-        <h3>Total: <%= @counter %> minutes</h3>
+        <h3>Durée : <%= @counter %> minutes</h3>
       <% else %>
         <% if (@counter / 60) == 1 %>
-          <h3>Total: <%= @counter / 60 %> heure et <%= @counter % 60 %> minutes</h3>
+          <h3>Durée : <%= @counter / 60 %> heure et <%= @counter % 60 %> minutes</h3>
         <% else %>
-          <h3>Total: <%= @counter / 60 %> heures et <%= @counter % 60 %> minutes</h3>
+          <h3>Durée : <%= @counter / 60 %> heures et <%= @counter % 60 %> minutes</h3>
         <% end %>
       <% end %>
     </div>
   <% end %>
   <div class="mb-5">
-    <%= link_to 'Creer une nouvelle tâche', new_project_task_path(@project), class: 'btn btn-primary' %>
-    <%= link_to 'Retour', user_projects_path(current_user), class: 'btn btn-primary' %>
+    <%= link_to 'Ajouter un élément', new_project_task_path(@project), class: 'btn btn-primary' %>
+    <%= link_to 'Page précédente', user_projects_path(current_user), class: 'btn btn-primary' %>
   </div>
 </div>
 
