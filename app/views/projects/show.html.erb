@@ -66,7 +66,7 @@
               <% task.comments.each do |comment| %>
                 <li>
                   <div class="line">
-                    <div class="comment">
+                    <div class="comment", id = "comment_<%= comment.id %>">
                       <%= comment.content.capitalize %> --- <%= comment.duration %> minutes
                     </div>
                     <div class="comment-assets hidden">
@@ -93,9 +93,10 @@
               <i class="fas fa-plus-circle"></i>
             <% end %>
           </div>
+
           <div class="duration">
             <% duration = 0 %>
-            <% task.comments.each { |comment| duration += comment.duration } if task.present? %>
+            <% task.comments.each { |comment| (duration if comment.duration.nil?) || (duration += comment.duration) } if task.present? %>
             <% if duration.positive? %>
               <%= duration %>
               minutes
@@ -259,3 +260,4 @@
     conclusions[i].addEventListener('click', listener.bind(null, i))
   };
 </script>
+

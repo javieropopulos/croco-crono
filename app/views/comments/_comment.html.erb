@@ -1,0 +1,21 @@
+<li>
+  <div class="line">
+    <div class="comment", id = "comment_<%= comment.id %>">
+      <%= comment.content.capitalize %> --- <%= comment.duration %> minutes
+    </div>
+    <div class="comment-assets hidden">
+      <%= link_to task_move_comment_lower_path(@task, comment), method: :patch do %>
+        <i class="fas fa-arrow-down"></i>
+      <% end %>
+      <%= link_to task_move_comment_higher_path(@task, comment), method: :patch do %>
+        <i class="fas fa-arrow-up"></i>
+      <% end %>
+      <%= link_to task_comment_path(@task, comment), method: :delete do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+      <%= link_to edit_task_comment_path(@task, comment) do %>
+        <i class="far fa-edit"></i>
+      <% end %>
+    </div>
+  </div>
+</li>

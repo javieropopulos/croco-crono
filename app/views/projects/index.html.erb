@@ -7,13 +7,15 @@
     <% @projects.each do |project| %>
       <ul>
         <li>
-          <%= link_to edit_user_project_path(current_user, project) do %>
-            <i class="far fa-edit"></i>
-          <% end %>
-          <%= link_to user_project_path(current_user, project), method: :delete do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-          <%= link_to project.name.capitalize, user_project_path(current_user, project)  %>
+          <div class="project">
+            <%= link_to edit_user_project_path(current_user, project) do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+            <%= link_to user_project_path(current_user, project), method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+            <%= link_to project.name.capitalize, user_project_path(current_user, project)  %>
+          </div>
         </li>
       </ul>
     <% end %>

@@ -1,0 +1,38 @@
+.forms {
+  text-align: center;
+  color:#1f6733;
+  h2 {
+    font-weight: bold;
+  }
+}
+
+.login-button {
+  margin-bottom: 20px;
+  .btn-primary {
+    background-color: white;
+    border-color: #1f6733;
+    border-width: 3px;
+    border-radius: 50px;
+    font-size: 40px;
+    color: #1f6733;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    &:hover {
+      background-color: rgba(0, 255, 0, .1);
+      color: #1f6733;
+      border-color: #1f6733;
+    }
+  }
+}
+
+.container {
+  h1 {
+    color:#1f6733;
+    font-weight: bold;
+  }
+  li {
+    list-style-type: none;
+  }
+}

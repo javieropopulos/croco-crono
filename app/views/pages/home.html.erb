@@ -1,12 +1,32 @@
+<div id="image-home">
+  <%= image_tag("croco-logo.svg", :alt => "logo") %>
+  <div id="first-part">
+    <h1>CR</h1>
+  </div>
+  <div id="second-part">
+    <h1>CO </h1>
+  </div>
+  <div id="third-part">
+    <h1>CRONO</h1>
+  </div>
+</div>
+
 <div class="container">
-  <h1>Croco Crono</h1>
   <% if !current_user %>
-    <%= link_to 'Nouvel utilisateur', new_user_registration_path, class: 'btn btn-primary' %>
-    <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-primary' %>
+    <div class="home-gauche">
+      <%= link_to 'Nouvel utilisateur', new_user_registration_path, class: 'btn btn-primary' %>
+    </div>
+    <div class="home-droite">
+      <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-primary' %>
+    </div>
   <% end %>
 
   <% if current_user %>
-    <%= link_to 'Mes projets', user_projects_path(current_user), class: 'btn btn-primary' %>
-    <%= link_to 'Deconnexion', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    <div class="home-gauche">
+      <%= link_to 'Mes projets', user_projects_path(current_user), class: 'btn btn-primary' %>
+    </div>
+    <div class="home-droite">
+      <%= link_to 'Deconnexion', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    </div>
   <% end %>
 </div>

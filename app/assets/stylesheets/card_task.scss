@@ -96,11 +96,99 @@
   right: 25px;
 }
 
-.logo {
+#logo {
   margin-top: 20px;
   margin-left: 20px;
   width: 500px;
   height:150px;
+}
+
+#image-home {
+  width: 75%;
+  margin-left: 10%;
+  margin-top: 8%;
+  height: auto;
+  position: relative;
+}
+
+#first-part {
+ position: absolute;
+ color: #1f6733;
+ top: -8%;
+ left: 6%;
+ h1 {
+  font-size: 125px;
+ }
+}
+
+#second-part {
+  position: absolute;
+  color: #1f6733;
+  top: -8%;
+  left: 35%;
+  h1 {
+  font-size: 125px;
+ }
+}
+
+#third-part {
+  position: absolute;
+  color: #1f6733;
+  top: 20%;
+  left: 8%;
+  h1 {
+  font-size: 125px;
+ }
+}
+
+.home-gauche {
+  position: absolute;
+  left: 12%;
+  margin-top: 5%;
+  .btn-primary {
+    background-color: white;
+    border-color: #1f6733;
+    border-width: 3px;
+    border-radius: 50px;
+    transition: .5s;
+    font-size: 40px;
+    color: #1f6733;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    &:hover {
+      background-color: white;
+      color: #1f6733;
+      border-color: #1f6733;
+      font-size: 42px;
+    }
+  }
+}
+
+.home-droite {
+  position: absolute;
+  left: 55%;
+  margin-top: 5%;
+  .btn-primary {
+    background-color: white;
+    border-color: #1f6733;
+    border-width: 3px;
+    border-radius: 50px;
+    transition: .5s;
+    font-size: 40px;
+    color: #1f6733;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    &:hover {
+      background-color: white;
+      color: #1f6733;
+      border-color: #1f6733;
+      font-size: 42px;
+    }
+  }
 }
 
 .hidden {
@@ -137,3 +225,22 @@
   left: 15px;
   font-size: 12px;
 }
+
+.fa-edit {
+  color: blue;
+}
+
+.fa-trash-alt {
+  color: red;
+}
+
+.project {
+  a {
+    color: #1f6733;
+    &:hover {
+      color: green;
+      text-decoration: none;
+    }
+  }
+}
+

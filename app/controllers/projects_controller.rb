@@ -23,10 +23,11 @@ class ProjectsController < ApplicationController
     @introductions = @project.introductions
     @conclusions = @project.conclusions
     @counter = 0
-    @tasks.each { |task| task.comments.each { |comment| @counter += comment.duration } }
+    @tasks.each { |task| task.comments.each { |comment| @counter += (comment.duration || 0) } }
     @start_time = @project.start_time.to_s[10..-8]
     @minutes = @start_time[-2..-1].to_i
     @hours = @start_time[0..2].to_i
+    @comment = Comment.new
   end
 
   def destroy

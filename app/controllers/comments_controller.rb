@@ -9,11 +9,24 @@ class CommentsController < ApplicationController
     @project = @task.project
     @comment = Comment.new(comment_params)
     @comment.task = @task
-    if @comment.save!
-      redirect_to user_project_path(current_user, @project)
-    else
-      render 'new'
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to user_project_path(current_user, @project) }
+        format.js {}
+        format.json { render :project, status: :created, location: @comment }
+      else
+        format.html { render :new }
+        format.js {}
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
+
+    # if @comment.save!
+    #   redirect_to user_project_path(current_user, @project)
+    # else
+    #   render 'new'
+    # end
   end
 
   def destroy
@@ -43,6 +56,7 @@ class CommentsController < ApplicationController
     @comment.move_higher
     @comment.save!
     redirect_to user_project_path(current_user, @project)
+    # redirect_back(fallback_location: root_path)
   end
 
   def move_comment_lower
@@ -52,6 +66,7 @@ class CommentsController < ApplicationController
     @comment.move_lower
     @comment.save!
     redirect_to user_project_path(current_user, @project)
+    # redirect_back(fallback_location: root_path)
   end
 
   def sort
