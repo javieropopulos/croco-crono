@@ -189,6 +189,25 @@
       font-size: 42px;
     }
   }
+  .btn-danger {
+    background-color: white;
+    border-color: #1f6733;
+    border-width: 3px;
+    border-radius: 50px;
+    transition: .5s;
+    font-size: 40px;
+    color: #1f6733;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    &:hover {
+      background-color: white;
+      color: #1f6733;
+      border-color: #1f6733;
+      font-size: 42px;
+    }
+  }
 }
 
 .hidden {
